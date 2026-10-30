@@ -47,7 +47,8 @@ from the booking-v3 form and <ProblemCount ticket={4471} problem="shift" /> one-
 
 The shared parser reads dates month first. Every tenant on file writes the day first, so any date whose
 day is 12 or less comes out with day and month swapped: a booking for 7 April lands on 4 July. This is
-what #4471 describes, and its queued fix is the fix for this problem.
+what #4471 describes, and its queued fix is the fix for this problem. Most of these reports show the swap
+in their own dates; a few only say the day was wrong, and land here by their tenant and channel.
 
 ### `hint`: booking-v3 asks for the month first
 
@@ -60,10 +61,10 @@ reports sent through the form of a booking-v3 tenant land here.
 
 > Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.
 
-These reports describe a date that is one day off, or an invite dated before its booking, never a
-swapped month. A date that is stored as
-a moment in time and shown in another time zone does this. It needs its own reproduction, by time zone,
-and its own fix.
+These reports describe a date that is one day off, or an invite that arrived before its booking was
+made, never a swapped month. The cause is not known yet. Only the Lisbon/Toronto report points at time
+zones; a date stored as a moment in time and shown in another zone would do this, but that is a guess
+until someone reproduces it. It needs its own reproduction and its own fix.
 
 ## Lessons
 

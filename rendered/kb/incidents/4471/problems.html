@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="../../../_app/immutable/entry/start.BhzxE6sh.js" rel="modulepreload">
+    <link href="../../../_app/immutable/entry/start.CwARBh5q.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/dkgbl6Me.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/IcRbjfQY.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Yg-NJcrt.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DzfzsUbq.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.BoBzx-iB.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.CF-PygTZ.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/B4gOfvMX.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/B3nrjOkk.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CaojPxAP.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BCs92F4W.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.DBJgXyNF.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/Ba8fEgwE.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/5.D7tLDzOf.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DhDa-Gro.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/5.C_NBTIO6.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BTb6y_zX.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/B5zzrPu9.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BtI8RDBz.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/iXLSwIXB.js" rel="modulepreload">
@@ -42,25 +42,26 @@ Each id counts once.</li> <li><strong>A one-day move is <code>shift</code>.</str
 tenant’s locale, their booking form and the channel the report came in by. Intake’s tag is a guess
 from the reporter’s browser and is wrong often enough not to count on it.</li></ol> <h2>The problems</h2> <h3><code>parser</code>: every date is read month first</h3> <p>The shared parser reads dates month first. Every tenant on file writes the day first, so any date whose
 day is 12 or less comes out with day and month swapped: a booking for 7 April lands on 4 July. This is
-what #4471 describes, and its queued fix is the fix for this problem.</p> <h3><code>hint</code>: booking-v3 asks for the month first</h3> <p>The booking-v3 form prints <code>MM/DD/YYYY</code> under its date field, for tenants who write the day first.
+what #4471 describes, and its queued fix is the fix for this problem. Most of these reports show the swap
+in their own dates; a few only say the day was wrong, and land here by their tenant and channel.</p> <h3><code>hint</code>: booking-v3 asks for the month first</h3> <p>The booking-v3 form prints <code>MM/DD/YYYY</code> under its date field, for tenants who write the day first.
 People type what the hint asks; the form reads it the tenant’s way, day first. The result looks the same
 as <code>parser</code>, but the parser fix does not touch it: the hint has to follow the tenant’s locale. Only
-reports sent through the form of a booking-v3 tenant land here.</p> <h3><code>shift</code>: the date moves by one day</h3> <blockquote><p>Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.</p></blockquote> <p>These reports describe a date that is one day off, or an invite dated before its booking, never a
-swapped month. A date that is stored as
-a moment in time and shown in another time zone does this. It needs its own reproduction, by time zone,
-and its own fix.</p> <h2>Lessons</h2> <ul><li>A subject line says how a report feels, not what broke. Different bugs share “wrong day”.</li> <li>Before calling a merged ticket known, place its reports by cause and count them from the data.</li> <li>Notes the desk already wrote (here: the one-day moves) are evidence. Read them before merging.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-GD1V-3QNT</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+reports sent through the form of a booking-v3 tenant land here.</p> <h3><code>shift</code>: the date moves by one day</h3> <blockquote><p>Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.</p></blockquote> <p>These reports describe a date that is one day off, or an invite that arrived before its booking was
+made, never a swapped month. The cause is not known yet. Only the Lisbon/Toronto report points at time
+zones; a date stored as a moment in time and shown in another zone would do this, but that is a guess
+until someone reproduces it. It needs its own reproduction and its own fix.</p> <h2>Lessons</h2> <ul><li>A subject line says how a report feels, not what broke. Different bugs share “wrong day”.</li> <li>Before calling a merged ticket known, place its reports by cause and count them from the data.</li> <li>Notes the desk already wrote (here: the one-day moves) are evidence. Read them before merging.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-GD1V-3QNT</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_t7qtdp = {
+					__sveltekit_vfhcm0 = {
 						base: new URL("../../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../../_app/immutable/entry/start.BhzxE6sh.js"),
-						import("../../../_app/immutable/entry/app.BoBzx-iB.js")
+						import("../../../_app/immutable/entry/start.CwARBh5q.js"),
+						import("../../../_app/immutable/entry/app.CF-PygTZ.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],
