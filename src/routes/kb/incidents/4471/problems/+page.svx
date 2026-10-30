@@ -30,11 +30,12 @@ The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leave
 <CauseTable ticket={4471} />
 
 The counts are the desk's own, from the export: each id once, placed by tenant, not by intake's tag.
-Each ticket carries the count of its row here.
+The tickets split the same reports so that each one sits in exactly one ticket, and each ticket lists
+the ids it covers.
 
-- **`parser`** is #1. The desk files the one-day moves under it by tenant, so its row counts them too, and
-  so does #1.
-- **`hint`** is #2. The view still says it has no ticket of its own; it has one now.
+- **`parser`** is #1: this row without the one-day moves. The desk files those under `parser` by tenant,
+  but a month/day swap does not move a date by one day.
+- **`hint`** is #2: this whole row. The view still says it has no ticket of its own; it has one now.
 - **The one-day moves**, the line under the table, are #3. The desk already read them differently from
   their cause and noted them in `desk-notes.json`.
 
