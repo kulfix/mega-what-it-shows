@@ -20,7 +20,8 @@ export default {
     }),
   ],
   kit: {
-    adapter: adapter(),
+    // The built site is kept in the repo, so the pages can be read as the desk sees them.
+    adapter: adapter({ pages: 'rendered', assets: 'rendered' }),
     alias: { '#lib': 'src/lib' },
     // One self-contained file per page: styles inline, so a saved page looks the same offline.
     inlineStyleThreshold: Infinity,
