@@ -1,0 +1,74 @@
+---
+layout: runbook
+title: '#4471 · what the reports show'
+owner: kulfix
+status: open
+reviewed: 2026-10-30
+signature: kulfix
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import ProblemCount from '#lib/kb/ProblemCount.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const issues = 'https://github.com/kulfix/mega-what-it-shows/issues';
+  const tickets = { parser: `${issues}/1`, hint: `${issues}/2`, shift: `${issues}/3` };
+</script>
+
+[#4471](/kb/incidents/4471) holds <ProblemCount ticket={4471} /> reports about dates. They were merged on
+their subject lines ([decision 0001](/kb/decisions/0001-dedupe-by-subject)) and the ticket is marked
+known: one issue, one fix queued. Read for what they show, they are not one issue. Each problem below
+now has a ticket of its own, and the queued parser fix closes only the first.
+
+<Callout kind="warn">
+Shipping the parser fix and closing #4471 leaves <ProblemCount ticket={4471} problem="hint" /> reports
+from the booking-v3 form and <ProblemCount ticket={4471} problem="shift" /> one-day moves without a fix.
+</Callout>
+
+## The split
+
+<ProblemTable ticket={4471} {tickets} />
+
+## How a report is placed
+
+1. **One id, one report.** The ticket export comes in pages that overlap, so some reports come twice.
+   Each id counts once.
+2. **A one-day move is `shift`.** The desk already read some reports as a date moved by one day
+   (`desk-notes.json`). A month/day flip can't do that: it moves a date by months, or not at all.
+3. **Everything else goes by tenant, not by intake's tag.** `causeOf` in `causes.ts` looks at the
+   tenant's locale, their booking form and the channel the report came in by. Intake's tag is a guess
+   from the reporter's browser and is wrong often enough not to count on it.
+
+## The problems
+
+### `parser`: every date is read month first
+
+The shared parser reads dates month first. Every tenant on file writes the day first, so any date whose
+day is 12 or less comes out with day and month swapped: a booking for 7 April lands on 4 July. This is
+what #4471 describes, and its queued fix is the fix for this problem.
+
+### `hint`: booking-v3 asks for the month first
+
+The booking-v3 form prints `MM/DD/YYYY` under its date field, for tenants who write the day first.
+People type what the hint asks; the form reads it the tenant's way, day first. The result looks the same
+as `parser`, but the parser fix does not touch it: the hint has to follow the tenant's locale. Only
+reports sent through the form of a booking-v3 tenant land here.
+
+### `shift`: the date moves by one day
+
+> Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.
+
+These reports describe a date that is one day off, or an invite dated before its booking, never a
+swapped month. A date that is stored as
+a moment in time and shown in another time zone does this. It needs its own reproduction, by time zone,
+and its own fix.
+
+## Lessons
+
+- A subject line says how a report feels, not what broke. Different bugs share "wrong day".
+- Before calling a merged ticket known, place its reports by cause and count them from the data.
+- Notes the desk already wrote (here: the one-day moves) are evidence. Read them before merging.
+
+<RenderStamp {signature} />
