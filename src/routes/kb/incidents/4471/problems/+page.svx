@@ -14,15 +14,14 @@ signature: kulfix
 </script>
 
 [#4471](/kb/incidents/4471) was merged on subject lines ([decision 0001](/kb/decisions/0001-dedupe-by-subject))
-and marked known: one issue, one fix queued. Read for what they show, its reports hold three problems.
-Each now has a ticket of its own:
+and marked known: one issue, one fix queued. Read for what its own view shows, its reports hold two
+problems. Each now has a ticket of its own:
 
 1. `parser`, dates read month first: [#1](https://github.com/kulfix/mega-what-it-shows/issues/1)
 2. `hint`, booking-v3 asks for the month first: [#2](https://github.com/kulfix/mega-what-it-shows/issues/2)
-3. one-day moves: [#3](https://github.com/kulfix/mega-what-it-shows/issues/3)
 
 <Callout kind="warn">
-The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leaves #2 and #3 without a fix.
+The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leaves #2 without a fix.
 </Callout>
 
 ## What the desk's view shows
@@ -30,14 +29,11 @@ The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leave
 <CauseTable ticket={4471} />
 
 The counts are the desk's own, from the export: each id once, placed by tenant, not by intake's tag.
-The tickets split the same reports so that each one sits in exactly one ticket, and each ticket lists
-the ids it covers.
+Each ticket carries the count of its row here and lists the ids it covers.
 
-- **`parser`** is #1: this row without the one-day moves. The desk files those under `parser` by tenant,
-  but a month/day swap does not move a date by one day.
+- **`parser`** is #1: this whole row, the one-day moves under the table included. The desk files those
+  under `parser` by tenant and footnotes them; #1 does the same.
 - **`hint`** is #2: this whole row. The view still says it has no ticket of its own; it has one now.
-- **The one-day moves**, the line under the table, are #3. The desk already read them differently from
-  their cause and noted them in `desk-notes.json`.
 
 ## The problems
 
@@ -55,20 +51,20 @@ People type what the hint asks; the form reads it the tenant's way, day first. T
 as `parser`, but the parser fix does not touch it: the hint has to follow the tenant's locale. Only
 reports sent through the form of a booking-v3 tenant land here.
 
-### One-day moves: the date moves by one day
+### The footnote: reports read as a one-day move
 
 > Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.
 
-These reports describe a date that is one day off, or an invite that arrived before its booking was
-made, never a swapped month. The cause is not known yet. Only the Lisbon/Toronto report points at time
-zones; a date stored as a moment in time and shown in another zone would do this, but that is a guess
-until someone reproduces it. It needs its own reproduction and its own fix.
+The desk read a few `parser` reports as a date moved by one day, or an invite that arrived before its
+booking was made. They stay in #1, where the desk files them. A month/day swap does not explain a
+one-day move, so re-check them when the parser fix ships; if they still happen, they need their own
+reproduction.
 
 ## Lessons
 
 - A subject line says how a report feels, not what broke. Different bugs share "wrong day".
 - Before calling a merged ticket known, read what its own table shows: here, a row marked "no ticket of
   its own" and a footnote.
-- Notes the desk already wrote (here: the one-day moves) are evidence. Read them before merging.
+- Count with the desk's own view: one id once, by tenant, footnotes where they're filed.
 
 <RenderStamp {signature} />
