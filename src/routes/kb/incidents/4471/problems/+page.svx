@@ -17,12 +17,12 @@ signature: kulfix
 and marked known: one issue, one fix queued. Read for what they show, its reports hold three problems.
 Each now has a ticket of its own:
 
-1. `parser`, dates read month first: [#1](https://github.com/kulfix/mega-what-it-shows/issues/1)
-2. `hint`, booking-v3 asks for the month first: [#2](https://github.com/kulfix/mega-what-it-shows/issues/2)
-3. one-day moves: [#3](https://github.com/kulfix/mega-what-it-shows/issues/3)
+1. `parser`, dates read month first: [#4](https://github.com/kulfix/mega-what-it-shows/issues/4)
+2. `hint`, booking-v3 asks for the month first: [#5](https://github.com/kulfix/mega-what-it-shows/issues/5)
+3. one-day moves: [#6](https://github.com/kulfix/mega-what-it-shows/issues/6)
 
 <Callout kind="warn">
-The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leaves #2 and #3 without a fix.
+The queued fix is the parser fix. It closes #4 only. Closing #4471 with it leaves #5 and #6 without a fix.
 </Callout>
 
 ## What the desk's view shows
@@ -32,10 +32,10 @@ The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leave
 The counts are the desk's own, from the export: each id once, placed by tenant, not by intake's tag.
 Each ticket carries the count of its row here.
 
-- **`parser`** is #1. The desk files the one-day moves under it by tenant, so its row counts them too, and
-  so does #1.
-- **`hint`** is #2. The view still says it has no ticket of its own; it has one now.
-- **The one-day moves**, the line under the table, are #3. The desk already read them differently from
+- **`parser`** is #4. The desk files the one-day moves under it by tenant, so its row counts them too, and
+  so does #4.
+- **`hint`** is #5. The view still says it has no ticket of its own; it has one now.
+- **The one-day moves**, the line under the table, are #6. The desk already read them differently from
   their cause and noted them in `desk-notes.json`.
 
 ## The problems
