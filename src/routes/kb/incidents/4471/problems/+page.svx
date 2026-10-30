@@ -25,26 +25,18 @@ Each now has a ticket of its own:
 The queued fix is the parser fix. It closes #4 only. Closing #4471 with it leaves #5 and #6 without a fix.
 </Callout>
 
-## What the desk's view shows now
-
-The reports are re-filed in the kb data: the booking-v3 form reports under ticket 5, the one-day moves
-under ticket 6, the rest stays in #4471. The desk's own view counts each ticket, unchanged from the
-export.
-
-### `parser`: what stays in #4471 ([#4](https://github.com/kulfix/mega-what-it-shows/issues/4))
+## What the desk's view shows
 
 <CauseTable ticket={4471} />
 
-### `hint`: ticket 5 ([#5](https://github.com/kulfix/mega-what-it-shows/issues/5))
+The counts are the desk's own, from the export: each id once, placed by tenant, not by intake's tag.
+Each ticket carries the count of its row here.
 
-<CauseTable ticket={5} />
-
-### One-day moves: ticket 6 ([#6](https://github.com/kulfix/mega-what-it-shows/issues/6))
-
-<CauseTable ticket={6} />
-
-The view files the one-day moves under `parser` by tenant: it knows no cause for a date that moves by one
-day. They have a ticket of their own all the same, because a month/day swap does not move a date by one day.
+- **`parser`** is #4. The desk files the one-day moves under it by tenant, so its row counts them too, and
+  so does #4.
+- **`hint`** is #5. The view still says it has no ticket of its own; it has one now.
+- **The one-day moves**, the line under the table, are #6. The desk already read them differently from
+  their cause and noted them in `desk-notes.json`.
 
 ## The problems
 
