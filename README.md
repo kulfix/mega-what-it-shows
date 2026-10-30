@@ -39,8 +39,8 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 
 The kb export above, plus one signed page: what the reports merged into #4471 show.
 
-- The page: `src/routes/kb/incidents/4471/problems/+page.svx`. Its numbers come from
-  `src/lib/kb/problems.ts`, `ProblemTable.svelte` and `ProblemCount.svelte`.
+- The page: `src/routes/kb/incidents/4471/problems/+page.svx`. It uses only the desk's own components,
+  as exported (`CauseTable`, `Callout`, `RenderStamp`); `src/lib` is unchanged from the export.
 - The page as the desk sees it: `rendered/kb/incidents/4471/problems.html` (the whole kb is built into `rendered/`).
 - The tickets: one issue per problem in this repo, linked from the page.
 

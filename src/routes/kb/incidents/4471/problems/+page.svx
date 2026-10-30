@@ -8,38 +8,35 @@ signature: kulfix
 ---
 
 <script>
-  import ProblemTable from '#lib/kb/ProblemTable.svelte';
-  import ProblemCount from '#lib/kb/ProblemCount.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
-
-  const issues = 'https://github.com/kulfix/mega-what-it-shows/issues';
-  const tickets = { parser: `${issues}/1`, hint: `${issues}/2`, shift: `${issues}/3` };
 </script>
 
-[#4471](/kb/incidents/4471) holds <ProblemCount ticket={4471} /> reports about dates. They were merged on
-their subject lines ([decision 0001](/kb/decisions/0001-dedupe-by-subject)) and the ticket is marked
-known: one issue, one fix queued. Read for what they show, they are not one issue. Each problem below
-now has a ticket of its own, and the queued parser fix closes only the first.
+[#4471](/kb/incidents/4471) was merged on subject lines ([decision 0001](/kb/decisions/0001-dedupe-by-subject))
+and marked known: one issue, one fix queued. Read for what they show, its reports hold three problems.
+Each now has a ticket of its own:
+
+1. `parser`, dates read month first: [#1](https://github.com/kulfix/mega-what-it-shows/issues/1)
+2. `hint`, booking-v3 asks for the month first: [#2](https://github.com/kulfix/mega-what-it-shows/issues/2)
+3. one-day moves: [#3](https://github.com/kulfix/mega-what-it-shows/issues/3)
 
 <Callout kind="warn">
-Shipping the parser fix and closing #4471 leaves <ProblemCount ticket={4471} problem="hint" /> reports
-from the booking-v3 form and <ProblemCount ticket={4471} problem="shift" /> one-day moves without a fix.
+The queued fix is the parser fix. It closes #1 only. Closing #4471 with it leaves #2 and #3 without a fix.
 </Callout>
 
-## The split
+## What the desk's view shows
 
-<ProblemTable ticket={4471} {tickets} />
+<CauseTable ticket={4471} />
 
-## How a report is placed
+The counts are the desk's own, from the export: each id once, placed by tenant, not by intake's tag.
+Each ticket carries the count of its row here.
 
-1. **One id, one report.** The ticket export comes in pages that overlap, so some reports come twice.
-   Each id counts once.
-2. **A one-day move is `shift`.** The desk already read some reports as a date moved by one day
-   (`desk-notes.json`). A month/day flip can't do that: it moves a date by months, or not at all.
-3. **Everything else goes by tenant, not by intake's tag.** `causeOf` in `causes.ts` looks at the
-   tenant's locale, their booking form and the channel the report came in by. Intake's tag is a guess
-   from the reporter's browser and is wrong often enough not to count on it.
+- **`parser`** is #1. The desk files the one-day moves under it by tenant, so its row counts them too, and
+  so does #1.
+- **`hint`** is #2. The view still says it has no ticket of its own; it has one now.
+- **The one-day moves**, the line under the table, are #3. The desk already read them differently from
+  their cause and noted them in `desk-notes.json`.
 
 ## The problems
 
@@ -57,7 +54,7 @@ People type what the hint asks; the form reads it the tenant's way, day first. T
 as `parser`, but the parser fix does not touch it: the hint has to follow the tenant's locale. Only
 reports sent through the form of a booking-v3 tenant land here.
 
-### `shift`: the date moves by one day
+### One-day moves: the date moves by one day
 
 > Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.
 
@@ -69,7 +66,8 @@ until someone reproduces it. It needs its own reproduction and its own fix.
 ## Lessons
 
 - A subject line says how a report feels, not what broke. Different bugs share "wrong day".
-- Before calling a merged ticket known, place its reports by cause and count them from the data.
+- Before calling a merged ticket known, read what its own table shows: here, a row marked "no ticket of
+  its own" and a footnote.
 - Notes the desk already wrote (here: the one-day moves) are evidence. Read them before merging.
 
 <RenderStamp {signature} />
