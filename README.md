@@ -3,8 +3,8 @@
 The support desk's kb export (`kb-export-267efc5e.zip`), unpacked as it came: `support-kb/`.
 One page is added to it, signed:
 
-- the page: `support-kb/src/routes/kb/incidents/4471/problems/+page.svx`
-- the page as the desk will see it: `support-kb/rendered/kb/incidents/4471/problems.html` (the whole kb is built into `support-kb/rendered/`)
+- the page: `support-kb/src/routes/kb/incidents/4471-problems/+page.svx`
+- the page as the desk will see it: `support-kb/rendered/kb/incidents/4471-problems.html` (the whole kb is built into `support-kb/rendered/`)
 - the tickets: one issue per problem in #4471, in this repo, linked from the page
 
 Everything else under `support-kb/src/` is byte-identical to the export. To build the kb (Node 22, pnpm):
